@@ -10,9 +10,10 @@ async def rename_file(bot, msg):
     if len(msg.command) < 2 or not reply:
        return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     media = reply.document or reply.audio or reply.video
-    if not media:
-       await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     og_media = getattr(reply, reply.media.value)
+    filexname = og_media.file_name
+    if media:
+       await msg.reply_text("/rename {filexname}")
     new_name = msg.text.split(" ", 1)[1]
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
