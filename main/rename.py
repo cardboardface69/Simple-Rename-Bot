@@ -4,19 +4,12 @@ from pyrogram import Client, filters, enums
 from config import temp, CAPTION, ADMIN
 from main.utils import progress_message, humanbytes
 
-@Client.on_message(filters.private & filters.command("rename") & filters.user(ADMIN))             
+@Client.on_message(filters.private & filters.document & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
-    msg_id = msg.id
-    if len(msg.command) < 2 or not reply:
-       return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     media = reply.document or reply.audio or reply.video
-    await bot.send_message(
-    chat_id=message.chat.id,
-    text="hello",
-    reply_to_message_id=msg.id)
     og_media = getattr(reply, reply.media.value)
-    new_name = msg.text.split(" ", 1)[1]
+    new_name = og_media.file_name
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
@@ -42,4 +35,5 @@ async def rename_file(bot, msg):
         os.remove(og_thumbnail)
     except:
         pass
+    await sts.delete()
     await sts.delete()
