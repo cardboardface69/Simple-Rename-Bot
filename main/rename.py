@@ -7,10 +7,14 @@ from main.utils import progress_message, humanbytes
 @Client.on_message(filters.private & filters.command("rename") & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
+    msg_id = msg.id
     if len(msg.command) < 2 or not reply:
        return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     media = reply.document or reply.audio or reply.video
-    await msg.reply.document("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
+    await bot.send_message(
+    chat_id=message.chat.id,
+    text="hello",
+    reply_to_message_id=msg.id)
     og_media = getattr(reply, reply.media.value)
     new_name = msg.text.split(" ", 1)[1]
     new_namex = new_name.replace(".mkv", "")
