@@ -6,7 +6,7 @@ from main.utils import progress_message, humanbytes
 
 @Client.on_message(filters.private & filters.document & filters.user(ADMIN))             
 async def rename_file(bot, msg):
-    reply = msg.reply_to_message
+    reply = msg.reply_to_document
     media = reply.document or reply.audio or reply.video
     og_media = getattr(reply, reply.media.value)
     new_name = "yes.mkv"
