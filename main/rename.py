@@ -13,7 +13,7 @@ async def rename_file(bot, msg):
     og_media = getattr(reply, reply.media.value)
     filexname = og_media.file_name
     if media:
-       await msg.reply_text("/rename {filexname}")
+       await media.reply_text("/rename f"{filexname}"")
     new_name = msg.text.split(" ", 1)[1]
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
