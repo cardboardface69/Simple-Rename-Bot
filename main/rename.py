@@ -9,7 +9,7 @@ async def rename_file(bot, msg):
     reply = msg.reply_to_message
     media = msg.document or msg.audio or msg.video
     og_media = getattr(reply, reply.media.value)
-    new_name = msg.text.split(" ", 1)[1]
+    new_name = "hell.mkv"
     new_namex = new_name.replace(".mkv", "")
     sts = await media.reply_text("Trying to Downloading.....")
     c_time = time.time()
