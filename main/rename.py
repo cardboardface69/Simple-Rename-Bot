@@ -4,7 +4,7 @@ from pyrogram import Client, filters, enums
 from config import temp, CAPTION, ADMIN
 from main.utils import progress_message, humanbytes
 
-@Client.on_message(filters.private & filters.command("rename") & filters.user(ADMIN))             
+@Client.on_message(filters.private & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
     media = msg.document or msg.audio or msg.video
