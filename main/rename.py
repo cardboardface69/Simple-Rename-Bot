@@ -7,17 +7,13 @@ from main.utils import progress_message, humanbytes
 @Client.on_message(filters.private & filters.command("rename") & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
-    if len(msg.command) < 2 or not reply:
-       return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
-    media = reply.document or reply.audio or reply.video
-    if not media:
-       await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
+    media = msg.document or msg.audio or msg.video
     og_media = getattr(reply, reply.media.value)
     new_name = msg.text.split(" ", 1)[1]
     new_namex = new_name.replace(".mkv", "")
-    sts = await msg.reply_text("Trying to Downloading.....")
+    sts = await media.reply_text("Trying to Downloading.....")
     c_time = time.time()
-    downloaded = msg.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time)) 
+    downloaded = media.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time)) 
     filesize = humanbytes(og_media.file_size)                
     if CAPTION:
         try:
