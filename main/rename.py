@@ -7,16 +7,14 @@ from main.utils import progress_message, humanbytes
 @Client.on_message(filters.private & filters.document & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
-    og_media = getattr(msg, msg.media.value)
     new_name = "hell.mkv"
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
-    downloaded = msg.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time)) 
-    filesize = humanbytes(og_media.file_size)                
+    downloaded = msg.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
     if CAPTION:
         try:
-            cap = CAPTION.format(file_name=new_name, file_size=filesize)
+            cap = CAPTION.format(file_name=new_name)
         except Exception as e:            
             await sts.edit(text=f"Your caption Error unexpected keyword ●> ({e})")
             return
@@ -31,7 +29,6 @@ async def rename_file(bot, msg):
         return               
     try:
         os.remove(downloaded)
-        os.remove(og_thumbnail)
     except:
         pass
     await sts.delete()
