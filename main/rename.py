@@ -7,11 +7,12 @@ from main.utils import progress_message, humanbytes
 @Client.on_message(filters.private & filters.document & filters.user(ADMIN))             
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
+    cos = msg.id
     new_name = "hellx firex 720p.mkv"
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
-    downloaded = msg.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
+    downloaded = cos.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
     if CAPTION:
         try:
             cap = CAPTION.format(file_name=new_name)
