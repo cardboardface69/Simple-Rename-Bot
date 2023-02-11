@@ -8,12 +8,11 @@ from main.utils import progress_message, humanbytes
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
     cos = msg.id
-    og_media = getattr(msg.media.value)
-    new_name = og_media.file_name
-    new_namex = new_name.replace(".mkv", "")
+    new_namex = "hello"
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
-    downloaded = await msg.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
+    downloaded = await msg.download(progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
+    file_name = downloaded.name
     if CAPTION:
         try:
             cap = CAPTION.format(file_name=new_name)
@@ -25,7 +24,7 @@ async def rename_file(bot, msg):
     await sts.edit("Trying to Uploading")
     c_time = time.time()
     try:
-        await bot.send_document(msg.chat.id, document=downloaded, caption=cap, progress=progress_message, progress_args=("Uploade Started.....", sts, c_time))        
+        await bot.send_document(msg.chat.id, document=downloaded, file_name = file_name, caption=cap, progress=progress_message, progress_args=("Uploade Started.....", sts, c_time))        
     except Exception as e:  
         await sts.edit(f"Error {e}") 
         return               
