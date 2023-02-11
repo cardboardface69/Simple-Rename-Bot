@@ -8,7 +8,7 @@ from main.utils import progress_message, humanbytes
 async def rename_file(bot, msg):
     reply = msg.reply_to_message
     cos = msg.id
-    new_name = msg.file.name
+    new_name = os.path.basename(msg)
     new_namex = new_name.replace(".mkv", "")
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
