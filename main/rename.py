@@ -12,7 +12,7 @@ async def rename_file(bot, msg):
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
     downloaded = await msg.download(progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
-    file_name = downloaded.file.name
+    file_name = downloaded.file_name
     if CAPTION:
         try:
             cap = CAPTION.format(file_name=file_name)
