@@ -10,10 +10,9 @@ async def rename_file(bot, msg):
     cos = msg.id
     new_name = "hellx firex 720p.mkv"
     new_namex = new_name.replace(".mkv", "")
-    og_media = getattr(reply, reply.media.value)
     sts = await msg.reply_text("Trying to Downloading.....")
     c_time = time.time()
-    downloaded = reply.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
+    downloaded = await cos.download(file_name=new_name, progress=progress_message, progress_args=("Download Started.....", sts, c_time))                 
     if CAPTION:
         try:
             cap = CAPTION.format(file_name=new_name)
