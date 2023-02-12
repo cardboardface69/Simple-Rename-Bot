@@ -26,6 +26,8 @@ async def rename_file(bot, msg):
     filename = os.path.basename(downloaded)
     filename = filename.replace("720p", "720p x265 BD")
     filename = filename.replace("@Anime_Gallery", "@animxt")
+    filename = filename.replace("[Judas]", "")
+    filename = filename.replace(".mkv", " [1080p x265 BD][Dual] @animxt.mkv"
     try:
         await bot.send_document(msg.chat.id, document=downloaded, file_name=filename, caption=filename.replace(".mkv", ""), progress=progress_message, progress_args=("Uploade Started.....", sts, c_time))        
     except Exception as e:  
