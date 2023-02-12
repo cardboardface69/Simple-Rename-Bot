@@ -24,8 +24,10 @@ async def rename_file(bot, msg):
     await sts.edit("Trying to Uploading")
     c_time = time.time()
     filename = os.path.basename(downloaded)
+    filename = filename.replace("720p", "720p x265 BD")
+    filename = filename.replace("@Anime_Gallery", "@animxt")
     try:
-        await bot.send_document(msg.chat.id, document=downloaded, file_name=filename.replace("@Anime_Gallery", "@animxt"), caption=cap, progress=progress_message, progress_args=("Uploade Started.....", sts, c_time))        
+        await bot.send_document(msg.chat.id, document=downloaded, file_name=filename, caption=filename.replace(".mkv", ""), progress=progress_message, progress_args=("Uploade Started.....", sts, c_time))        
     except Exception as e:  
         await sts.edit(f"Error {e}") 
         return               
