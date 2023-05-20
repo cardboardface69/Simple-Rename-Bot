@@ -1,5 +1,7 @@
 import asyncio
 import re
+import os
+import psutil
 from pyrogram import Client, filters, idle
 from config import *
 from uvloop import install
@@ -51,7 +53,7 @@ async def start(bot, cmd: Message):
             
             
 @app.on_message(filters.command(["stats"]) & filters.private)
-async def stats_handler(c: Client, m: Message):
+async def stats_handler(bot, m: Message):
     currentTime = get_readable_time(time.time() - botStartTime)
     total, used, free = shutil.disk_usage(".")
     total = get_readable_file_size(total)
