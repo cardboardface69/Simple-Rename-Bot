@@ -2,7 +2,7 @@ pyrogram
 Tgcrypto
 aiohttp 
 pyrogram==1.4.16
-
+psutil
 TgCrypto
 
 aiohttp
