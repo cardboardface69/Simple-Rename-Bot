@@ -1,6 +1,9 @@
 import asyncio
 import re
 import os
+import time
+import math
+import shutil
 import psutil
 from pyrogram import Client, filters, idle
 from config import *
@@ -23,6 +26,7 @@ def b64_to_str(b64: str) -> str:
     bytes_str = standard_b64decode(bytes_b64)
     __str = bytes_str.decode('ascii')
     return __str
+botStartTime = time.time()
 def str_to_b64(__str: str) -> str:
 
     str_bytes = __str.encode('ascii')
@@ -32,6 +36,35 @@ def str_to_b64(__str: str) -> str:
     b64 = bytes_b64.decode('ascii')
 
     return b64
+def get_readable_file_size(size_in_bytes) -> str:
+    if size_in_bytes is None:
+        return "0B"
+    index = 0
+    while size_in_bytes >= 1024:
+        size_in_bytes /= 1024
+        index += 1
+    try:
+        return f"{round(size_in_bytes, 2)}{SIZE_UNITS[index]}"
+    except IndexError:
+        return "File too large"
+    
+def get_readable_time(seconds: int) -> str:
+    result = ""
+    (days, remainder) = divmod(seconds, 86400)
+    days = int(days)
+    if days != 0:
+        result += f"{days}d"
+    (hours, remainder) = divmod(remainder, 3600)
+    hours = int(hours)
+    if hours != 0:
+        result += f"{hours}h"
+    (minutes, seconds) = divmod(remainder, 60)
+    minutes = int(minutes)
+    if minutes != 0:
+        result += f"{minutes}m"
+    seconds = int(seconds)
+    result += f"{seconds}s"
+    return result
 
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
