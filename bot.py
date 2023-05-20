@@ -36,6 +36,7 @@ def str_to_b64(__str: str) -> str:
     b64 = bytes_b64.decode('ascii')
 
     return b64
+SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 def get_readable_file_size(size_in_bytes) -> str:
     if size_in_bytes is None:
         return "0B"
